@@ -1,4 +1,5 @@
 import os
+from sqlite3 import connect
 
 from flask import Flask
 from flask_restful import Api
@@ -13,7 +14,7 @@ load_dotenv()
 app = Flask(__name__)
 GlobalVariables.APP = app
 api = Api(GlobalVariables.APP)
-client = MongoClient(os.environ.get("MONGODB_URI"))
+client = MongoClient(os.environ.get("MONGODB_URI"),connect=False)
 GlobalVariables.APP.db = client.microblog
 
 InitialiseLogging().setupLogging()
